@@ -3,79 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إلياس | معرض المشاريع والتطبيقات</title>
+    <title>Talib DZ | التجربة الجامعية الذكية</title>
     <style>
         :root {
-            --primary: #1B5E20;
-            --secondary: #2E7D32;
-            --accent: #FFFFD700;
-            --dark: #121212;
-            --light: #F1F5F9;
+            --premium-black: #000000;
+            --vibrant-yellow: #FFD700;
+            --soft-gray: #F5F5F5;
+            --dark-gray: #333333;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: var(--light); color: var(--dark); line-height: 1.6; text-align: right; }
-        
-        /* الهيدر والتعريف */
-        header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 60px 20px; text-align: center; border-bottom-left-radius: 40px; border-bottom-right-radius: 40px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        header h1 { font-size: 2.5rem; margin-bottom: 10px; }
-        header p { font-size: 1.2rem; color: #E8F5E9; opacity: 0.9; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { background-color: var(--premium-black); color: var(--soft-gray); line-height: 1.6; text-align: center; }
 
-        /* سيكشن المشاريع */
-        .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
-        .section-title { font-size: 1.8rem; color: var(--primary); margin-bottom: 25px; border-right: 5px solid var(--primary); padding-right: 15px; }
-        
-        /* كارت التطبيق */
-        .project-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; transition: transform 0.3s; margin-bottom: 30px; }
-        .project-card:hover { transform: translateY(-5px); }
-        .project-details { padding: 30px; }
-        .badge { background-color: #E8F5E9; color: var(--primary); padding: 5px 12px; border-radius: 12px; font-size: 0.85rem; font-weight: bold; display: inline-block; margin-bottom: 15px; }
-        .project-title { font-size: 1.8rem; margin-bottom: 15px; color: var(--primary); }
-        .project-desc { color: #555; font-size: 1.05rem; margin-bottom: 20px; }
-        
-        /* أزرار التحميل */
-        .btn { display: inline-flex; align-items: center; justify-content: center; background-color: var(--primary); color: white; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 1.1rem; transition: background 0.3s; box-shadow: 0 4px 10px rgba(27,94,32,0.3); }
-        .btn:hover { background-color: #0f3d13; }
-        .btn span { margin-left: 10px; }
+        /* سيكشن البداية */
+        .hero { padding: 80px 20px; border-bottom: 2px solid var(--vibrant-yellow); }
+        .hero h1 { font-size: 3.5rem; color: var(--vibrant-yellow); margin-bottom: 15px; }
+        .hero p { font-size: 1.2rem; max-width: 600px; margin: 0 auto; color: #ccc; }
 
-        /* الفوتر */
-        footer { text-align: center; padding: 30px; color: #777; font-size: 0.9rem; margin-top: 60px; border-top: 1px solid #E2E8F0; }
+        /* الكارت الفخم */
+        .container { max-width: 700px; margin: 50px auto; padding: 20px; }
+        .app-card {
+            background: #111;
+            padding: 40px;
+            border-radius: 30px;
+            border: 1px solid var(--dark-gray);
+            transition: 0.3s;
+        }
+        .app-card:hover { border-color: var(--vibrant-yellow); }
+        
+        .description { margin: 25px 0; font-size: 1.1rem; }
+        
+        /* الزر الفاخر */
+        .btn-download {
+            display: inline-block;
+            background-color: var(--vibrant-yellow);
+            color: var(--premium-black);
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.3rem;
+            transition: 0.4s;
+        }
+        .btn-download:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+
+        footer { margin-top: 80px; padding: 30px; border-top: 1px solid #222; color: #666; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>مرحباً بك في موقعي الشخصي 👋</h1>
-        <p>أنا مبرمج ومطور تطبيقات أندرويد ومشاريع برمجية ذكية</p>
-    </header>
+    <div class="hero">
+        <h1>Talib DZ</h1>
+        <p>الحقيبة الدراسية الذكية ومُنظم الوقت الأول المصمم خصيصاً للطالب الجزائري.</p>
+    </div>
 
     <div class="container">
-        <h2 class="section-title">مشاريعي الحالية</h2>
-
-        <!-- كارت تطبيق طالب دي زيد -->
-        <div class="project-card">
-            <div class="project-details">
-                <span class="badge">تطبيق أندرويد جاهز للتحميل 📱</span>
-                <h3 class="project-title">تطبيق Talib DZ</h3>
-                <p class="project-desc">الحقيبة الدراسية الذكية ومُنظم الوقت الأول المصمم خصيصاً للطالب الجزائري. يتيح لك تنظيم جدول حصصك اليومي بدقة مع تحديد أوقات البداية والنهاية، بالإضافة لمتابعة الفروض، الامتحانات، والواجبات المنزلية خطوة بخطوة.</p>
-                
-                <!-- 👈 اسبدل الرابط اللي تحت برابط ميديا فاير نتاعك كي ترفعه -->
-               <a href="https://github.com/ilyeshabib2000-max/ilyes-gh/releases/download/v1.0.0/Talib.dz.apk" class="btn" target="_blank">
-   تحميل التطبيق مجاناً (APK) <span>📥</span>
-</a>
-            </div>
-        </div>
-
-        <!-- كارت مشروع مستقبلي احتياطي -->
-        <div class="project-card" style="opacity: 0.7; border: 2px dashed #ccc; background: none; box-shadow: none;">
-            <div class="project-details" style="text-align: center; padding: 50px 20px;">
-                <h3 style="color: #777;">⏳ مشروع مستقبلي جديد قادم قريباً...</h3>
-                <p style="color: #999; margin-top: 10px;">أي تطبيق أو موقع نخدمه مستقبلاً راح ينزاد هنا ديريكت!</p>
-            </div>
+        <div class="app-card">
+            <h2>ميزات التطبيق</h2>
+            <p class="description">
+                تطبيق طالب ديزاد يدمج بين قوة الذكاء الاصطناعي وتنظيم الوقت الأكاديمي، ليمنحك تجربة دراسية فريدة. 
+                سواء كنت في التخصصات العلمية أو شبه الطبية، كل المراجع والحلول في مكان واحد.
+            </p>
+            <a href="https://github.com/ilyeshabib2000-max/ilyes-gh/releases/download/v1.1/Talib.dz.apk" class="btn-download">تحميل الإصدار الرسمي APK 📥</a>
         </div>
     </div>
 
     <footer>
-        <p>جميع الحقوق محفوظة © 2026 | مبرمج بواسطة إلياس</p>
+        <p>جميع الحقوق محفوظة © 2026 | تطوير بواسطة إلياس</p>
     </footer>
 
 </body>
