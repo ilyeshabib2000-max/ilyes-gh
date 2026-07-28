@@ -3,72 +3,442 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Talib DZ | التجربة الجامعية الذكية</title>
+    <title>طالب ديزاد | Talib DZ - المنصة الجامعية الأولى في الجزائر</title>
+    <!-- خط Tajawal الأنيق -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <!-- أيقونات FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
-            --premium-black: #000000;
-            --vibrant-yellow: #FFD700;
-            --soft-gray: #F5F5F5;
-            --dark-gray: #333333;
+            --primary: #059669; /* أخضر زمردي فخم */
+            --primary-dark: #047857;
+            --primary-deep: #022c22;
+            --accent-green: #10B981;
+            --bg-light: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-dark: #0F172A;
+            --text-muted: #64748B;
+            --border-color: rgba(5, 150, 105, 0.12);
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
-        body { background-color: var(--premium-black); color: var(--soft-gray); line-height: 1.6; text-align: center; }
 
-        /* سيكشن البداية */
-        .hero { padding: 80px 20px; border-bottom: 2px solid var(--vibrant-yellow); }
-        .hero h1 { font-size: 3.5rem; color: var(--vibrant-yellow); margin-bottom: 15px; }
-        .hero p { font-size: 1.2rem; max-width: 600px; margin: 0 auto; color: #ccc; }
-
-        /* الكارت الفخم */
-        .container { max-width: 700px; margin: 50px auto; padding: 20px; }
-        .app-card {
-            background: #111;
-            padding: 40px;
-            border-radius: 30px;
-            border: 1px solid var(--dark-gray);
-            transition: 0.3s;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+            scroll-behavior: smooth;
         }
-        .app-card:hover { border-color: var(--vibrant-yellow); }
-        
-        .description { margin: 25px 0; font-size: 1.1rem; }
-        
-        /* الزر الفاخر */
-        .btn-download {
-            display: inline-block;
-            background-color: var(--vibrant-yellow);
-            color: var(--premium-black);
-            padding: 18px 45px;
-            border-radius: 50px;
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* خلفية مزخرفة بلمسات جيو-زمردية */
+        .bg-glow-1 {
+            position: fixed;
+            top: -150px;
+            right: -150px;
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+            animation: floatGlow 10s infinite alternate ease-in-out;
+        }
+
+        .bg-glow-2 {
+            position: fixed;
+            bottom: -100px;
+            left: -100px;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(5, 150, 105, 0.12) 0%, rgba(255, 255, 255, 0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+            animation: floatGlow 12s infinite alternate-reverse ease-in-out;
+        }
+
+        /* الهيدر وشريط الملاحة */
+        header {
+            padding: 1.5rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.7rem;
+            font-weight: 900;
+            color: var(--primary-deep);
+            display: flex;
+            align-items: center;
+            gap: 12px;
             text-decoration: none;
-            font-weight: 800;
-            font-size: 1.3rem;
-            transition: 0.4s;
         }
-        .btn-download:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
 
-        footer { margin-top: 80px; padding: 30px; border-top: 1px solid #222; color: #666; font-size: 0.9rem; }
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            box-shadow: 0 8px 18px rgba(5, 150, 105, 0.25);
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-tag {
+            background: rgba(5, 150, 105, 0.08);
+            border: 1px solid rgba(5, 150, 105, 0.2);
+            color: var(--primary-dark);
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        /* القسم الرئيسي Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 3rem;
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 4rem 2rem 2rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero-content {
+            text-align: right;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(5, 150, 105, 0.08);
+            border: 1px solid rgba(5, 150, 105, 0.25);
+            color: var(--primary-dark);
+            padding: 0.6rem 1.4rem;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 1.8rem;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 900;
+            line-height: 1.25;
+            color: var(--primary-deep);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        /* أزرار التحميل */
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1.1rem 2.4rem;
+            border-radius: 18px;
+            font-size: 1.15rem;
+            font-weight: 800;
+            text-decoration: none;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 12px 28px rgba(5, 150, 105, 0.3);
+        }
+
+        .btn-download:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 18px 38px rgba(5, 150, 105, 0.42);
+        }
+
+        /* محاكي واجهة التطبيق (Phone Mockup) */
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .phone-mockup {
+            width: 310px;
+            height: 600px;
+            background: #022c22;
+            border-radius: 48px;
+            padding: 14px;
+            box-shadow: 0 25px 60px rgba(2, 44, 34, 0.25);
+            border: 4px solid #10B981;
+            animation: floatPhone 6s ease-in-out infinite;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: #F8FAFC;
+            border-radius: 36px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .phone-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 2.5rem 1.2rem 1.5rem;
+            color: white;
+            border-bottom-left-radius: 24px;
+            border-bottom-right-radius: 24px;
+        }
+
+        .phone-body {
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .mini-card {
+            background: white;
+            padding: 0.9rem;
+            border-radius: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            border: 1px solid rgba(5, 150, 105, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .mini-card i {
+            width: 35px;
+            height: 35px;
+            background: rgba(5, 150, 105, 0.1);
+            color: var(--primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* المميزات */
+        .features-section {
+            max-width: 1200px;
+            margin: 5rem auto 3rem;
+            padding: 0 2rem;
+            width: 100%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.3rem;
+            font-weight: 900;
+            color: var(--primary-deep);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem 2rem;
+            border-radius: 24px;
+            transition: all 0.35s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(5, 150, 105, 0.12);
+        }
+
+        .icon-box {
+            width: 65px;
+            height: 65px;
+            border-radius: 18px;
+            background: rgba(5, 150, 105, 0.08);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* الفوتر الفخم */
+        footer {
+            background: var(--primary-deep);
+            color: white;
+            padding: 3rem 2rem 2rem;
+            margin-top: 6rem;
+            border-top: 4px solid var(--primary);
+            text-align: center;
+        }
+
+        .signature-box {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .signature {
+            font-weight: 900;
+            color: #34D399;
+            font-size: 1.2rem;
+        }
+
+        /* Keyframes */
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 40px) scale(1.1); }
+        }
+
+        @keyframes floatPhone {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @media (max-width: 992px) {
+            .hero { grid-template-columns: 1fr; text-align: center; }
+            .hero-content { text-align: center; }
+            .hero h1 { font-size: 2.4rem; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="hero">
-        <h1>Talib DZ</h1>
-        <p>الحقيبة الدراسية الذكية ومُنظم الوقت الأول المصمم خصيصاً للطالب الجزائري.</p>
-    </div>
+    <div class="bg-glow-1"></div>
+    <div class="bg-glow-2"></div>
 
-    <div class="container">
-        <div class="app-card">
-            <h2>ميزات التطبيق</h2>
-            <p class="description">
-                تطبيق طالب ديزاد يدمج بين قوة الذكاء الاصطناعي وتنظيم الوقت الأكاديمي، ليمنحك تجربة دراسية فريدة. 
-                سواء كنت في التخصصات العلمية أو شبه الطبية، كل المراجع والحلول في مكان واحد.
-            </p>
-            <a href="https://github.com/ilyeshabib2000-max/ilyes-gh/releases/download/v1.1/Talib.dz.apk" class="btn-download">تحميل الإصدار الرسمي APK 📥</a>
-        </div>
-    </div>
+    <header>
+        <a href="#" class="logo">
+            <div class="logo-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            طالب <span>ديزاد</span>
+        </a>
+        <div class="nav-tag">المحتوى الجامعي الأكاديمي</div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <div class="badge">
+                    <i class="fa-solid fa-gem"></i> الإصدار 1.2 متوفر الآن
+                </div>
+                <h1>المنصة الأولى للدروس والملخصات <span>الجامعية</span></h1>
+                <p>تطبيق "طالب ديزاد" صُمم خصيصاً ليكون المرجع الأكاديمي الشامل لكل طالب جامعي، يجمع لك الدروس والمحاضرات بسهولة أنيقة وسرعة عالية.</p>
+
+                <!-- زر التحميل المباشر المربوط بالرابط -->
+                <a href="https://github.com/ilyeshabib2000-max/ilyes-gh/releases/download/1.2/Talib.DZ.apk" class="btn-download" target="_blank">
+                    <i class="fa-solid fa-circle-down"></i>
+                    تحميل التطبيق (إصدار 1.2 APK)
+                </a>
+            </div>
+
+            <!-- Phone Mockup -->
+            <div class="hero-visual">
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="phone-header">
+                            <h4>طالب ديزاد - Talib DZ</h4>
+                            <p style="font-size:0.75rem; opacity:0.9;">مكتبتك الرقمية الجامعية</p>
+                        </div>
+                        <div class="phone-body">
+                            <div class="mini-card">
+                                <i class="fa-solid fa-book-bookmark"></i>
+                                <div>
+                                    <h5 style="font-size:0.85rem;">محاضرات ودروس</h5>
+                                    <span style="font-size:0.7rem; color:#64748B;">مقسمة حسب السداسي</span>
+                                </div>
+                            </div>
+                            <div class="mini-card">
+                                <i class="fa-solid fa-file-lines"></i>
+                                <div>
+                                    <h5 style="font-size:0.85rem;">ملخصات سريعة</h5>
+                                    <span style="font-size:0.7rem; color:#64748B;">جاهزة للمراجعة</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <div class="section-title">
+                <h2>لماذا تختار تطبيق "طالب ديزاد"؟</h2>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="icon-box"><i class="fa-solid fa-building-columns"></i></div>
+                    <h3>محتوى جامعي حصري</h3>
+                    <p>تركيز كامل على الدروس والملخصات الخاصة بالمرحلة الجامعية فقط لضمان الجودة والسهولة.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon-box"><i class="fa-solid fa-bolt"></i></div>
+                    <h3>سرعة واستجابة عالية</h3>
+                    <p>واجهة مستخدم خفيفة وعصرية تضمن تنقل سريع بين الوحدات والمواد الدراسية.</p>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <footer>
-        <p>جميع الحقوق محفوظة © 2026 | تطوير بواسطة إلياس</p>
+        <div>
+            <div style="font-size: 1.6rem; font-weight: 900; margin-bottom: 0.5rem;">
+                <i class="fa-solid fa-graduation-cap"></i> طالب ديزاد
+            </div>
+            <div class="signature-box">
+                جميع الحقوق محفوظة © 2026 | تطوير بواسطة <span class="signature">Gh ilyes</span>
+            </div>
+        </div>
     </footer>
 
 </body>
