@@ -1,445 +1,1734 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>طالب ديزاد | Talib DZ - المنصة الجامعية الأولى في الجزائر</title>
-    <!-- خط Tajawal الأنيق -->
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
-    <!-- أيقونات FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        :root {
-            --primary: #059669; /* أخضر زمردي فخم */
-            --primary-dark: #047857;
-            --primary-deep: #022c22;
-            --accent-green: #10B981;
-            --bg-light: #F8FAFC;
-            --card-bg: #FFFFFF;
-            --text-dark: #0F172A;
-            --text-muted: #64748B;
-            --border-color: rgba(5, 150, 105, 0.12);
-        }
+  <meta name="theme-color" content="#080D18">
+  <meta name="description" content="Talib DZ - منصة رقمية جزائرية تهدف إلى مساعدة الطلبة الجامعيين عبر الدروس والتمارين والامتحانات وأدوات التنظيم. مشروع مستقل من تطوير Gh Ilyes.">
+  <meta name="author" content="Gh Ilyes">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Tajawal', sans-serif;
-            scroll-behavior: smooth;
-        }
+  <title>Talib DZ | منصة الطالب الجزائري</title>
 
-        body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            overflow-x: hidden;
-            position: relative;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-        /* خلفية مزخرفة بلمسات جيو-زمردية */
-        .bg-glow-1 {
-            position: fixed;
-            top: -150px;
-            right: -150px;
-            width: 550px;
-            height: 550px;
-            background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
-            border-radius: 50%;
-            z-index: -1;
-            animation: floatGlow 10s infinite alternate ease-in-out;
-        }
+  <style>
+    :root {
+      --bg: #080D18;
+      --bg-soft: #0D1424;
+      --card: #111B2D;
+      --card-light: #152138;
+      --gold: #E7BD68;
+      --gold-light: #F5D995;
+      --gold-dark: #B78A36;
+      --white: #F7F8FC;
+      --muted: #A5B0C3;
+      --border: rgba(231, 189, 104, 0.17);
+      --green: #35C991;
+      --radius: 22px;
+      --container: 1160px;
+    }
 
-        .bg-glow-2 {
-            position: fixed;
-            bottom: -100px;
-            left: -100px;
-            width: 450px;
-            height: 450px;
-            background: radial-gradient(circle, rgba(5, 150, 105, 0.12) 0%, rgba(255, 255, 255, 0) 70%);
-            border-radius: 50%;
-            z-index: -1;
-            animation: floatGlow 12s infinite alternate-reverse ease-in-out;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        /* الهيدر وشريط الملاحة */
-        header {
-            padding: 1.5rem 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
 
-        .logo {
-            font-size: 1.7rem;
-            font-weight: 900;
-            color: var(--primary-deep);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: "Tajawal", sans-serif;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
 
-        .logo-icon {
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            box-shadow: 0 8px 18px rgba(5, 150, 105, 0.25);
-        }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse at 80% 10%, rgba(231,189,104,.075), transparent 35%),
+        radial-gradient(ellipse at 10% 60%, rgba(45,82,142,.10), transparent 35%);
+    }
 
-        .logo span {
-            color: var(--primary);
-        }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-        .nav-tag {
-            background: rgba(5, 150, 105, 0.08);
-            border: 1px solid rgba(5, 150, 105, 0.2);
-            color: var(--primary-dark);
-            padding: 0.4rem 1rem;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            font-weight: 700;
-        }
+    button, a {
+      -webkit-tap-highlight-color: transparent;
+    }
 
-        /* القسم الرئيسي Hero Section */
-        .hero {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            gap: 3rem;
-            max-width: 1250px;
-            margin: 0 auto;
-            padding: 4rem 2rem 2rem;
-            animation: fadeIn 1s ease-out;
-        }
+    button {
+      font: inherit;
+    }
 
-        .hero-content {
-            text-align: right;
-        }
+    .container {
+      width: min(var(--container), calc(100% - 40px));
+      margin-inline: auto;
+    }
 
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(5, 150, 105, 0.08);
-            border: 1px solid rgba(5, 150, 105, 0.25);
-            color: var(--primary-dark);
-            padding: 0.6rem 1.4rem;
-            border-radius: 50px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            margin-bottom: 1.8rem;
-        }
+    .section {
+      padding: 95px 0;
+    }
 
-        .hero h1 {
-            font-size: 3.2rem;
-            font-weight: 900;
-            line-height: 1.25;
-            color: var(--primary-deep);
-            margin-bottom: 1.5rem;
-        }
+    .section-heading {
+      max-width: 730px;
+      margin: 0 auto 48px;
+      text-align: center;
+    }
 
-        .hero h1 span {
-            color: var(--primary);
-            position: relative;
-            display: inline-block;
-        }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--gold);
+      font-weight: 800;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
 
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--text-muted);
-            margin-bottom: 2.5rem;
-            line-height: 1.8;
-            font-weight: 500;
-        }
+    .eyebrow::before {
+      content: "";
+      width: 24px;
+      height: 2px;
+      background: var(--gold);
+      border-radius: 10px;
+    }
 
-        /* أزرار التحميل */
-        .btn-download {
-            display: inline-flex;
-            align-items: center;
-            gap: 1rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: 1.1rem 2.4rem;
-            border-radius: 18px;
-            font-size: 1.15rem;
-            font-weight: 800;
-            text-decoration: none;
-            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 12px 28px rgba(5, 150, 105, 0.3);
-        }
+    .section-heading h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.4;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
 
-        .btn-download:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 18px 38px rgba(5, 150, 105, 0.42);
-        }
+    .section-heading p {
+      color: var(--muted);
+      font-size: 17px;
+    }
 
-        /* محاكي واجهة التطبيق (Phone Mockup) */
-        .hero-visual {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+    .gold-text {
+      color: var(--gold);
+    }
 
-        .phone-mockup {
-            width: 310px;
-            height: 600px;
-            background: #022c22;
-            border-radius: 48px;
-            padding: 14px;
-            box-shadow: 0 25px 60px rgba(2, 44, 34, 0.25);
-            border: 4px solid #10B981;
-            animation: floatPhone 6s ease-in-out infinite;
-        }
+    /* Navigation */
 
-        .phone-screen {
-            width: 100%;
-            height: 100%;
-            background: #F8FAFC;
-            border-radius: 36px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8, 13, 24, .88);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
 
-        .phone-header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            padding: 2.5rem 1.2rem 1.5rem;
-            color: white;
-            border-bottom-left-radius: 24px;
-            border-bottom-right-radius: 24px;
-        }
+    .nav-inner {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
 
-        .phone-body {
-            padding: 1.2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
 
-        .mini-card {
-            background: white;
-            padding: 0.9rem;
-            border-radius: 14px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            border: 1px solid rgba(5, 150, 105, 0.08);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+    .brand-mark {
+      width: 45px;
+      height: 45px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      color: #101522;
+      background: linear-gradient(145deg, var(--gold-light), var(--gold-dark));
+      font-weight: 900;
+      font-size: 24px;
+      box-shadow: 0 5px 22px rgba(231,189,104,.13);
+    }
 
-        .mini-card i {
-            width: 35px;
-            height: 35px;
-            background: rgba(5, 150, 105, 0.1);
-            color: var(--primary);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    .brand-name {
+      font-weight: 900;
+      font-size: 21px;
+      line-height: 1.25;
+    }
 
-        /* المميزات */
-        .features-section {
-            max-width: 1200px;
-            margin: 5rem auto 3rem;
-            padding: 0 2rem;
-            width: 100%;
-        }
+    .brand-subtitle {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 500;
+    }
 
-        .section-title {
-            text-align: center;
-            margin-bottom: 3.5rem;
-        }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+    }
 
-        .section-title h2 {
-            font-size: 2.3rem;
-            font-weight: 900;
-            color: var(--primary-deep);
-        }
+    .nav-links a {
+      color: #C3CBDA;
+      font-size: 14px;
+      font-weight: 600;
+      transition: color .2s;
+    }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
+    .nav-links a:hover {
+      color: var(--gold);
+    }
 
-        .feature-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 2.5rem 2rem;
-            border-radius: 24px;
-            transition: all 0.35s ease;
-        }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 19px;
+      border-radius: 12px;
+      background: var(--gold);
+      color: #111522;
+      font-size: 14px;
+      font-weight: 900;
+      transition: transform .2s, background .2s;
+    }
 
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(5, 150, 105, 0.12);
-        }
+    .nav-cta:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+    }
 
-        .icon-box {
-            width: 65px;
-            height: 65px;
-            border-radius: 18px;
-            background: rgba(5, 150, 105, 0.08);
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-        }
+    /* Hero */
 
-        /* الفوتر الفخم */
-        footer {
-            background: var(--primary-deep);
-            color: white;
-            padding: 3rem 2rem 2rem;
-            margin-top: 6rem;
-            border-top: 4px solid var(--primary);
-            text-align: center;
-        }
+    .hero {
+      padding: 85px 0 90px;
+      position: relative;
+    }
 
-        .signature-box {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            padding: 0.8rem 1.8rem;
-            border-radius: 50px;
-            display: inline-block;
-            margin-top: 1rem;
-        }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      align-items: center;
+      gap: 65px;
+    }
 
-        .signature {
-            font-weight: 900;
-            color: #34D399;
-            font-size: 1.2rem;
-        }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      color: var(--gold-light);
+      background: rgba(231,189,104,.055);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 25px;
+    }
 
-        /* Keyframes */
-        @keyframes floatGlow {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(30px, 40px) scale(1.1); }
-        }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 12px rgba(53,201,145,.5);
+    }
 
-        @keyframes floatPhone {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
+    .hero h1 {
+      font-size: clamp(39px, 5.3vw, 65px);
+      font-weight: 900;
+      line-height: 1.3;
+      letter-spacing: -.7px;
+      margin-bottom: 22px;
+    }
 
-        @media (max-width: 992px) {
-            .hero { grid-template-columns: 1fr; text-align: center; }
-            .hero-content { text-align: center; }
-            .hero h1 { font-size: 2.4rem; }
-        }
-    </style>
+    .hero h1 .line-two {
+      display: block;
+      color: var(--gold);
+    }
+
+    .hero-description {
+      max-width: 600px;
+      color: #B4BED0;
+      font-size: 18px;
+      line-height: 2;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 11px;
+      min-height: 53px;
+      padding: 13px 24px;
+      border: 1px solid transparent;
+      border-radius: 13px;
+      font-size: 15px;
+      font-weight: 900;
+      transition: transform .2s, background .2s, border-color .2s;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn-primary {
+      color: #111522;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
+      box-shadow: 0 8px 28px rgba(183,138,54,.16);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #FFE5A5, var(--gold));
+    }
+
+    .btn-secondary {
+      color: var(--white);
+      background: rgba(255,255,255,.025);
+      border-color: rgba(255,255,255,.13);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold);
+    }
+
+    .hero-note {
+      margin-top: 20px;
+      color: #7F8BA1;
+      font-size: 13px;
+    }
+
+    /* CSS phone mockup */
+
+    .hero-visual {
+      position: relative;
+      min-height: 475px;
+      display: grid;
+      place-items: center;
+    }
+
+    .visual-glow {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: rgba(231,189,104,.10);
+      filter: blur(85px);
+      border-radius: 50%;
+    }
+
+    .phone {
+      position: relative;
+      width: 248px;
+      min-height: 450px;
+      border: 7px solid #30394A;
+      border-radius: 35px;
+      padding: 19px 13px;
+      background: linear-gradient(160deg, #152138, #090E19);
+      box-shadow: 0 30px 80px rgba(0,0,0,.42);
+      transform: rotate(-4deg);
+    }
+
+    .phone::before {
+      content: "";
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 65px;
+      height: 13px;
+      border-radius: 20px;
+      background: #30394A;
+    }
+
+    .phone-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 13px;
+      margin-bottom: 23px;
+    }
+
+    .phone-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    .phone-logo-icon {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      background: var(--gold);
+      color: #101522;
+      border-radius: 9px;
+    }
+
+    .phone-small {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .phone-welcome {
+      color: var(--gold);
+      font-size: 11px;
+      margin-bottom: 3px;
+    }
+
+    .phone-title {
+      font-size: 20px;
+      font-weight: 900;
+      margin-bottom: 13px;
+    }
+
+    .phone-search {
+      padding: 11px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 10px;
+      color: #8290A7;
+      font-size: 10px;
+      margin-bottom: 17px;
+    }
+
+    .phone-label {
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .phone-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+    }
+
+    .phone-feature {
+      padding: 12px 8px;
+      min-height: 87px;
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 12px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .phone-feature-icon {
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+
+    .phone-feature strong {
+      display: block;
+      font-size: 11px;
+    }
+
+    .phone-feature small {
+      color: #8895AA;
+      font-size: 9px;
+    }
+
+    .phone-bottom {
+      margin-top: 16px;
+      display: flex;
+      justify-content: space-around;
+      padding: 11px 3px;
+      background: rgba(231,189,104,.08);
+      border-radius: 11px;
+      color: var(--gold);
+      font-size: 10px;
+    }
+
+    .floating-card {
+      position: absolute;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 13px 16px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: rgba(17,27,45,.94);
+      box-shadow: 0 14px 35px rgba(0,0,0,.25);
+      backdrop-filter: blur(12px);
+    }
+
+    .floating-card.one {
+      right: -8px;
+      top: 70px;
+    }
+
+    .floating-card.two {
+      left: -12px;
+      bottom: 65px;
+    }
+
+    .floating-icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      background: rgba(231,189,104,.12);
+      border-radius: 11px;
+      font-size: 19px;
+    }
+
+    .floating-card strong {
+      display: block;
+      font-size: 12px;
+    }
+
+    .floating-card small {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    /* General highlights */
+
+    .highlights {
+      border-top: 1px solid rgba(255,255,255,.06);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      background: rgba(255,255,255,.015);
+    }
+
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      padding: 27px 0;
+    }
+
+    .highlight {
+      text-align: center;
+      padding: 8px;
+    }
+
+    .highlight strong {
+      display: block;
+      color: var(--gold);
+      font-size: 17px;
+      font-weight: 900;
+    }
+
+    .highlight span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 3px;
+    }
+
+    /* Features */
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 19px;
+    }
+
+    .feature-card {
+      padding: 28px 24px;
+      border: 1px solid rgba(255,255,255,.075);
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(21,33,56,.78), rgba(13,20,36,.82));
+      transition: transform .25s, border-color .25s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(231,189,104,.38);
+    }
+
+    .feature-icon {
+      width: 53px;
+      height: 53px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: rgba(231,189,104,.10);
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .feature-card h3 {
+      font-size: 19px;
+      font-weight: 900;
+      margin-bottom: 9px;
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.95;
+    }
+
+    /* Partnership */
+
+    .partnership {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 0% 100%, rgba(231,189,104,.09), transparent 42%),
+        linear-gradient(145deg, #10192B, #0B1120);
+      border-top: 1px solid rgba(231,189,104,.15);
+      border-bottom: 1px solid rgba(231,189,104,.15);
+    }
+
+    .partnership-layout {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      align-items: center;
+      gap: 55px;
+    }
+
+    .partnership-content h2 {
+      font-size: clamp(30px, 4vw, 44px);
+      font-weight: 900;
+      line-height: 1.45;
+      margin-bottom: 20px;
+    }
+
+    .partnership-content > p {
+      color: #B3BED0;
+      font-size: 16px;
+      line-height: 2;
+      margin-bottom: 23px;
+    }
+
+    .partnership-list {
+      display: grid;
+      gap: 13px;
+      margin-bottom: 29px;
+    }
+
+    .partnership-list li {
+      list-style: none;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      color: #D8DFEA;
+      font-size: 15px;
+    }
+
+    .check-icon {
+      flex-shrink: 0;
+      width: 23px;
+      height: 23px;
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+      border: 1px solid rgba(231,189,104,.35);
+      border-radius: 50%;
+      font-size: 12px;
+      margin-top: 3px;
+    }
+
+    .partnership-panel {
+      padding: 32px;
+      border: 1px solid rgba(231,189,104,.25);
+      border-radius: 24px;
+      background: rgba(8,13,24,.52);
+    }
+
+    .partnership-panel .panel-symbol {
+      width: 59px;
+      height: 59px;
+      display: grid;
+      place-items: center;
+      border-radius: 17px;
+      background: rgba(231,189,104,.12);
+      color: var(--gold);
+      font-size: 27px;
+      margin-bottom: 22px;
+    }
+
+    .partnership-panel h3 {
+      font-size: 23px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .partnership-panel p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 2;
+      margin-bottom: 23px;
+    }
+
+    .panel-divider {
+      height: 1px;
+      background: rgba(255,255,255,.09);
+      margin: 23px 0;
+    }
+
+    .panel-owner {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .owner-avatar {
+      width: 47px;
+      height: 47px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      border-radius: 14px;
+      color: #111522;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
+      font-size: 19px;
+      font-weight: 900;
+    }
+
+    .panel-owner strong {
+      display: block;
+      color: var(--gold);
+      font-size: 17px;
+    }
+
+    .panel-owner small {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* About the founder */
+
+    .founder-card {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 25px;
+      align-items: center;
+      padding: 35px;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: linear-gradient(125deg, rgba(21,33,56,.8), rgba(11,17,32,.8));
+    }
+
+    .founder-avatar {
+      width: 100px;
+      height: 100px;
+      display: grid;
+      place-items: center;
+      border-radius: 26px;
+      color: #111522;
+      background: linear-gradient(145deg, var(--gold-light), var(--gold-dark));
+      font-size: 30px;
+      font-weight: 900;
+      box-shadow: 0 10px 30px rgba(231,189,104,.10);
+    }
+
+    .founder-role {
+      color: var(--gold);
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .founder-info h3 {
+      font-size: 27px;
+      font-weight: 900;
+      margin-bottom: 7px;
+    }
+
+    .founder-info p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.95;
+      margin-bottom: 17px;
+    }
+
+    .founder-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .small-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 13px;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 10px;
+      color: #D9E0EC;
+      font-size: 12px;
+      transition: border-color .2s, color .2s;
+    }
+
+    .small-link:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* Contact */
+
+    .contact-section {
+      padding-top: 30px;
+    }
+
+    .contact-card {
+      position: relative;
+      overflow: hidden;
+      padding: 55px 30px;
+      text-align: center;
+      border: 1px solid rgba(231,189,104,.25);
+      border-radius: 27px;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(231,189,104,.10), transparent 55%),
+        linear-gradient(145deg, #111B2D, #0B1120);
+    }
+
+    .contact-card h2 {
+      max-width: 760px;
+      margin: 0 auto 15px;
+      font-size: clamp(27px, 4vw, 39px);
+      font-weight: 900;
+      line-height: 1.5;
+    }
+
+    .contact-card > p {
+      max-width: 670px;
+      margin: 0 auto 27px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 2;
+    }
+
+    .email-address {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--gold-light);
+      font-size: clamp(15px, 2.5vw, 19px);
+      font-weight: 700;
+      direction: ltr;
+      overflow-wrap: anywhere;
+      margin-bottom: 25px;
+    }
+
+    .email-address:hover {
+      color: white;
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .contact-note {
+      margin-top: 20px;
+      color: #7F8BA1;
+      font-size: 12px;
+    }
+
+    /* Footer */
+
+    .footer {
+      border-top: 1px solid rgba(255,255,255,.07);
+      padding: 34px 0 90px;
+    }
+
+    .footer-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .footer-description {
+      color: #8793A9;
+      font-size: 12px;
+      margin-top: 8px;
+      max-width: 390px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 19px;
+    }
+
+    .footer-links a {
+      color: #A5B0C3;
+      font-size: 13px;
+      transition: color .2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(255,255,255,.06);
+      margin-top: 25px;
+      padding-top: 20px;
+      color: #7D899F;
+      font-size: 12px;
+    }
+
+    .footer-bottom strong {
+      color: var(--gold);
+    }
+
+    /* Sticky download button */
+
+    .download-dock {
+      position: fixed;
+      z-index: 90;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: max-content;
+      max-width: calc(100% - 24px);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 9px 10px 9px 17px;
+      border: 1px solid rgba(231,189,104,.24);
+      border-radius: 17px;
+      background: rgba(13,20,36,.94);
+      box-shadow: 0 10px 45px rgba(0,0,0,.42);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .dock-text {
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .dock-text strong {
+      display: block;
+      color: var(--white);
+      font-size: 13px;
+    }
+
+    .dock-text span {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .dock-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      flex-shrink: 0;
+      padding: 11px 15px;
+      border-radius: 11px;
+      background: var(--gold);
+      color: #101522;
+      font-size: 12px;
+      font-weight: 900;
+      transition: background .2s;
+    }
+
+    .dock-button:hover {
+      background: var(--gold-light);
+    }
+
+    /* Responsive */
+
+    @media (max-width: 950px) {
+      .nav-links {
+        gap: 14px;
+      }
+
+      .nav-links a {
+        font-size: 12px;
+      }
+
+      .hero-grid {
+        gap: 25px;
+      }
+
+      .partnership-layout {
+        gap: 30px;
+      }
+
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .container {
+        width: min(100% - 30px, var(--container));
+      }
+
+      .nav-inner {
+        min-height: 70px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .nav-cta {
+        padding: 10px 13px;
+        font-size: 12px;
+      }
+
+      .hero {
+        padding: 60px 0 50px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .hero-content {
+        text-align: center;
+      }
+
+      .hero-description {
+        margin-inline: auto;
+        font-size: 16px;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .hero-note {
+        text-align: center;
+      }
+
+      .hero-visual {
+        min-height: 440px;
+        margin-top: 5px;
+      }
+
+      .phone {
+        transform: rotate(-2deg) scale(.92);
+      }
+
+      .floating-card.one {
+        right: 0;
+        top: 60px;
+      }
+
+      .floating-card.two {
+        left: 0;
+        bottom: 40px;
+      }
+
+      .section {
+        padding: 68px 0;
+      }
+
+      .section-heading {
+        margin-bottom: 32px;
+      }
+
+      .highlights-grid {
+        gap: 5px;
+      }
+
+      .highlight strong {
+        font-size: 14px;
+      }
+
+      .highlight span {
+        font-size: 11px;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: 13px;
+      }
+
+      .feature-card {
+        padding: 23px;
+      }
+
+      .partnership-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .partnership-content {
+        text-align: center;
+      }
+
+      .partnership-list {
+        text-align: right;
+      }
+
+      .partnership-content .btn {
+        width: 100%;
+      }
+
+      .partnership-panel {
+        padding: 25px;
+      }
+
+      .founder-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+        justify-items: center;
+        padding: 28px 20px;
+      }
+
+      .founder-links {
+        justify-content: center;
+      }
+
+      .contact-card {
+        padding: 40px 20px;
+      }
+
+      .contact-actions {
+        flex-direction: column;
+      }
+
+      .contact-actions .btn {
+        width: 100%;
+      }
+
+      .footer-main,
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+      }
+
+      .footer-links {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .brand-name {
+        font-size: 18px;
+      }
+
+      .brand-mark {
+        width: 39px;
+        height: 39px;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .floating-card {
+        padding: 10px;
+      }
+
+      .floating-card.one {
+        right: -3px;
+      }
+
+      .floating-card.two {
+        left: -3px;
+      }
+
+      .dock-text {
+        display: none;
+      }
+
+      .download-dock {
+        width: auto;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *, *::before, *::after {
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-    <div class="bg-glow-1"></div>
-    <div class="bg-glow-2"></div>
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="container nav-inner">
 
-    <header>
-        <a href="#" class="logo">
-            <div class="logo-icon">
-                <i class="fa-solid fa-graduation-cap"></i>
-            </div>
-            طالب <span>ديزاد</span>
-        </a>
-        <div class="nav-tag">المحتوى الجامعي الأكاديمي</div>
-    </header>
+      <a class="brand" href="#home" aria-label="Talib DZ الصفحة الرئيسية">
+        <span class="brand-mark">ط</span>
+        <span>
+          <span class="brand-name">Talib DZ</span>
+          <span class="brand-subtitle" style="display:block;">منصة الطالب الجزائري</span>
+        </span>
+      </a>
 
-    <main>
-        <section class="hero">
-            <div class="hero-content">
-                <div class="badge">
-                    <i class="fa-solid fa-gem"></i> الإصدار 1.2 متوفر الآن
-                </div>
-                <h1>المنصة الأولى للدروس والملخصات <span>الجامعية</span></h1>
-                <p>تطبيق "طالب ديزاد" صُمم خصيصاً ليكون المرجع الأكاديمي الشامل لكل طالب جامعي، يجمع لك الدروس والمحاضرات بسهولة أنيقة وسرعة عالية.</p>
+      <nav class="nav-links" aria-label="القائمة الرئيسية">
+        <a href="#home">الرئيسية</a>
+        <a href="#features">المميزات</a>
+        <a href="#partnership">الشراكة</a>
+        <a href="#founder">صاحب المشروع</a>
+        <a href="#contact">تواصل معنا</a>
+      </nav>
 
-                <!-- زر التحميل المباشر المربوط بالرابط -->
-                <a href="https://github.com/ilyeshabib2000-max/ilyes-gh/releases/download/1.2/Talib.DZ.apk" class="btn-download" target="_blank">
-                    <i class="fa-solid fa-circle-down"></i>
-                    تحميل التطبيق (إصدار 1.2 APK)
-                </a>
-            </div>
+      <a class="nav-cta" href="#download">تحميل التطبيق ↓</a>
 
-            <!-- Phone Mockup -->
-            <div class="hero-visual">
-                <div class="phone-mockup">
-                    <div class="phone-screen">
-                        <div class="phone-header">
-                            <h4>طالب ديزاد - Talib DZ</h4>
-                            <p style="font-size:0.75rem; opacity:0.9;">مكتبتك الرقمية الجامعية</p>
-                        </div>
-                        <div class="phone-body">
-                            <div class="mini-card">
-                                <i class="fa-solid fa-book-bookmark"></i>
-                                <div>
-                                    <h5 style="font-size:0.85rem;">محاضرات ودروس</h5>
-                                    <span style="font-size:0.7rem; color:#64748B;">مقسمة حسب السداسي</span>
-                                </div>
-                            </div>
-                            <div class="mini-card">
-                                <i class="fa-solid fa-file-lines"></i>
-                                <div>
-                                    <h5 style="font-size:0.85rem;">ملخصات سريعة</h5>
-                                    <span style="font-size:0.7rem; color:#64748B;">جاهزة للمراجعة</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    </div>
+  </header>
 
-        <section class="features-section">
-            <div class="section-title">
-                <h2>لماذا تختار تطبيق "طالب ديزاد"؟</h2>
-            </div>
+  <main>
 
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="icon-box"><i class="fa-solid fa-building-columns"></i></div>
-                    <h3>محتوى جامعي حصري</h3>
-                    <p>تركيز كامل على الدروس والملخصات الخاصة بالمرحلة الجامعية فقط لضمان الجودة والسهولة.</p>
-                </div>
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <div class="container hero-grid">
 
-                <div class="feature-card">
-                    <div class="icon-box"><i class="fa-solid fa-bolt"></i></div>
-                    <h3>سرعة واستجابة عالية</h3>
-                    <p>واجهة مستخدم خفيفة وعصرية تضمن تنقل سريع بين الوحدات والمواد الدراسية.</p>
-                </div>
-            </div>
-        </section>
-    </main>
+        <div class="hero-content">
 
-    <footer>
-        <div>
-            <div style="font-size: 1.6rem; font-weight: 900; margin-bottom: 0.5rem;">
-                <i class="fa-solid fa-graduation-cap"></i> طالب ديزاد
-            </div>
-            <div class="signature-box">
-                جميع الحقوق محفوظة © 2026 | تطوير بواسطة <span class="signature">Gh ilyes</span>
-            </div>
+          <div class="hero-badge">
+            <span class="status-dot"></span>
+            مشروع رقمي جزائري مستقل
+          </div>
+
+          <h1>
+            كل ما يحتاجه
+            <span class="line-two">الطالب الجزائري</span>
+            في مكان واحد
+          </h1>
+
+          <p class="hero-description">
+            Talib DZ منصة رقمية تهدف إلى تسهيل الحياة الجامعية،
+            من الوصول إلى الدروس والامتحانات والتمارين،
+            إلى تنظيم الوقت ومتابعة المسار الدراسي باستخدام أدوات عملية.
+          </p>
+
+          <div class="hero-actions" id="download">
+
+            <a
+              class="btn btn-primary"
+              href="https://github.com/ilyeshabib2000-max/ilyes-gh/releases/download/1.2/Talib.DZ.apk"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>تحميل التطبيق</span>
+              <span aria-hidden="true">↓</span>
+            </a>
+
+            <a class="btn btn-secondary" href="#features">
+              اكتشف المميزات
+              <span aria-hidden="true">←</span>
+            </a>
+
+          </div>
+
+          <p class="hero-note">
+            طوّره شاب جزائري بهدف تقديم تجربة جامعية أكثر تنظيمًا وسهولة.
+          </p>
+
         </div>
-    </footer>
+
+        <!-- Decorative app preview -->
+        <div class="hero-visual" aria-label="معاينة تصميم تطبيق Talib DZ">
+
+          <div class="visual-glow"></div>
+
+          <div class="floating-card one">
+            <div class="floating-icon">📚</div>
+            <div>
+              <strong>موارد دراسية</strong>
+              <small>دروس وتمارين وامتحانات</small>
+            </div>
+          </div>
+
+          <div class="phone">
+
+            <div class="phone-header">
+              <div class="phone-logo">
+                <span class="phone-logo-icon">ط</span>
+                <span>Talib DZ</span>
+              </div>
+              <span class="phone-small">الطالب أولًا</span>
+            </div>
+
+            <div class="phone-welcome">مرحبًا بك في</div>
+            <div class="phone-title">فضائك الجامعي</div>
+
+            <div class="phone-search">
+              🔎 ابحث عن الدروس والموارد...
+            </div>
+
+            <div class="phone-label">ماذا تحتاج اليوم؟</div>
+
+            <div class="phone-features">
+              <div class="phone-feature">
+                <div class="phone-feature-icon">📚</div>
+                <strong>الدروس</strong>
+                <small>موارد للمراجعة</small>
+              </div>
+
+              <div class="phone-feature">
+                <div class="phone-feature-icon">📝</div>
+                <strong>الامتحانات</strong>
+                <small>تدرّب واستعد</small>
+              </div>
+
+              <div class="phone-feature">
+                <div class="phone-feature-icon">📅</div>
+                <strong>التنظيم</strong>
+                <small>مهام ومواعيد</small>
+              </div>
+
+              <div class="phone-feature">
+                <div class="phone-feature-icon">🧮</div>
+                <strong>المعدل</strong>
+                <small>حساب النتائج</small>
+              </div>
+            </div>
+
+            <div class="phone-bottom">
+              <span>الرئيسية</span>
+              <span>الموارد</span>
+              <span>التنظيم</span>
+              <span>أدواتي</span>
+            </div>
+
+          </div>
+
+          <div class="floating-card two">
+            <div class="floating-icon">🇩🇿</div>
+            <div>
+              <strong>من الطالب الجزائري</strong>
+              <small>للطلاب في الجزائر</small>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Highlights -->
+    <section class="highlights" aria-label="أهداف المنصة">
+      <div class="container highlights-grid">
+
+        <div class="highlight">
+          <strong>التعلّم</strong>
+          <span>موارد تساعدك على المراجعة</span>
+        </div>
+
+        <div class="highlight">
+          <strong>التنظيم</strong>
+          <span>أدوات لتسيير الحياة الجامعية</span>
+        </div>
+
+        <div class="highlight">
+          <strong>الابتكار</strong>
+          <span>حلول رقمية تخدم الطالب</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section" id="features">
+      <div class="container">
+
+        <div class="section-heading">
+          <span class="eyebrow">ماذا يقدم Talib DZ؟</span>
+          <h2>أدوات جامعية في <span class="gold-text">تجربة واحدة</span></h2>
+          <p>
+            مجموعة من الموارد والأدوات التي تساعد الطالب على الوصول إلى
+            المعلومات وتنظيم وقته ومتابعة دراسته.
+          </p>
+        </div>
+
+        <div class="features-grid">
+
+          <article class="feature-card">
+            <div class="feature-icon">📚</div>
+            <h3>مكتبة دراسية</h3>
+            <p>
+              الوصول إلى الدروس والملفات والموارد التعليمية
+              المرتبطة بالتخصصات الجامعية المتاحة في المنصة.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">📝</div>
+            <h3>بنك الامتحانات والتمارين</h3>
+            <p>
+              مساحة للمراجعة والتدرب باستخدام التمارين
+              والمواضيع المتاحة للتحضير للدراسة والامتحانات.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">🧮</div>
+            <h3>حساب المعدل</h3>
+            <p>
+              أدوات تساعد الطالب على حساب معدلاته ومتابعة
+              نتائجه الدراسية بطريقة عملية.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">📅</div>
+            <h3>تنظيم الوقت والمهام</h3>
+            <p>
+              تنظيم المهام والمواعيد والتذكيرات حتى يتمكن
+              الطالب من متابعة التزاماته الدراسية.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">🤖</div>
+            <h3>أدوات ومساعدة ذكية</h3>
+            <p>
+              تجربة تهدف إلى الاستفادة من الأدوات الرقمية
+              والذكاء الاصطناعي في دعم التعلّم عند توفر الخدمة.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">🎓</div>
+            <h3>موارد الحياة الجامعية</h3>
+            <p>
+              محتوى وإرشادات ومعلومات تساعد الطالب على
+              اكتشاف الموارد والخدمات التي يحتاجها خلال مساره الجامعي.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Partnership -->
+    <section class="section partnership" id="partnership">
+      <div class="container partnership-layout">
+
+        <div class="partnership-content">
+
+          <span class="eyebrow">دعوة للتعاون والشراكة</span>
+
+          <h2>
+            مشروع جزائري بطموح أكبر،
+            <span class="gold-text">وفرصة لشراكة حقيقية</span>
+          </h2>
+
+          <p>
+            Talib DZ مشروع رقمي مستقل انطلق بمبادرة فردية لتقديم
+            خدمات وأدوات تساعد الطالب الجزائري. واليوم، نطمح إلى
+            تطويره وتوسيع أثره من خلال التعاون مع شركة جزائرية
+            تؤمن بالابتكار الرقمي والتعليم وبقدرات الشباب الجزائري.
+          </p>
+
+          <ul class="partnership-list">
+            <li>
+              <span class="check-icon">✓</span>
+              <span>بحث فرص شراكة وتعاون مع المؤسسات والشركات الجزائرية.</span>
+            </li>
+
+            <li>
+              <span class="check-icon">✓</span>
+              <span>تطوير المنصة وتحسين الخدمات الرقمية الموجهة للطلبة.</span>
+            </li>
+
+            <li>
+              <span class="check-icon">✓</span>
+              <span>دراسة فرص الدعم التقني والتسويقي وتبادل الخبرات.</span>
+            </li>
+
+            <li>
+              <span class="check-icon">✓</span>
+              <span>تحديد إطار واضح يحفظ حقوق صاحب المشروع ويبيّن أدوار الشركاء.</span>
+            </li>
+          </ul>
+
+          <a
+            class="btn btn-primary"
+            href="mailto:ilyeshabib2000@gmail.com?subject=Talib%20DZ%20-%20Proposition%20de%20partenariat"
+          >
+            ناقش معنا فرصة الشراكة
+            <span aria-hidden="true">←</span>
+          </a>
+
+        </div>
+
+        <aside class="partnership-panel">
+
+          <div class="panel-symbol">🤝</div>
+
+          <h3>لنبنِ شيئًا مفيدًا للطالب الجزائري</h3>
+
+          <p>
+            إذا كانت مؤسستكم مهتمة بالتعليم أو التكنولوجيا أو الابتكار
+            الرقمي، يسعدنا استقبال مقترحات التعاون ومناقشة رؤية
+            مستقبلية لتطوير Talib DZ.
+          </p>
+
+          <a
+            class="btn btn-secondary"
+            style="width:100%;"
+            href="mailto:ilyeshabib2000@gmail.com?subject=Talib%20DZ%20-%20Partnership"
+          >
+            مراسلة صاحب المشروع
+          </a>
+
+          <div class="panel-divider"></div>
+
+          <div class="panel-owner">
+            <div class="owner-avatar">GH</div>
+            <div>
+              <strong>Gh Ilyes</strong>
+              <small>مؤسس المشروع والمطوّر</small>
+            </div>
+          </div>
+
+        </aside>
+
+      </div>
+    </section>
+
+    <!-- Founder / Attribution -->
+    <section class="section" id="founder">
+      <div class="container">
+
+        <div class="section-heading">
+          <span class="eyebrow">صاحب المشروع</span>
+          <h2>وراء Talib DZ فكرة وجهد <span class="gold-text">جزائري</span></h2>
+          <p>
+            مشروع مستقل انطلق بهدف توظيف التكنولوجيا لخدمة الطلبة
+            وتقديم تجربة رقمية أقرب إلى احتياجاتهم.
+          </p>
+        </div>
+
+        <div class="founder-card">
+
+          <div class="founder-avatar">GH</div>
+
+          <div class="founder-info">
+            <div class="founder-role">المؤسس والمطوّر</div>
+
+            <h3>Gh Ilyes</h3>
+
+            <p>
+              صاحب فكرة Talib DZ والمسؤول عن تطوير المشروع.
+              أسعى إلى بناء منصة جامعية مفيدة للطلبة الجزائريين،
+              والعمل على تطويرها من خلال التحسين المستمر
+              والانفتاح على فرص التعاون والشراكة.
+            </p>
+
+            <div class="founder-links">
+
+              <a
+                class="small-link"
+                href="mailto:ilyeshabib2000@gmail.com"
+              >
+                ✉ البريد الإلكتروني
+              </a>
+
+              <a
+                class="small-link"
+                href="https://github.com/ilyeshabib2000-max"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub ↗
+              </a>
+
+              <a
+                class="small-link"
+                href="https://talibdz.netlify.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                موقع المنصة ↗
+              </a>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section contact-section" id="contact">
+      <div class="container">
+
+        <div class="contact-card">
+
+          <span class="eyebrow">التواصل الرسمي</span>
+
+          <h2>
+            عندك مقترح، استفسار أو
+            <span class="gold-text">فرصة شراكة؟</span>
+          </h2>
+
+          <p>
+            سواء كنت تمثل شركة جزائرية أو مؤسسة أو ترغب في مناقشة
+            فكرة تعاون، يمكنك التواصل مباشرة مع صاحب مشروع Talib DZ
+            عبر البريد الإلكتروني.
+          </p>
+
+          <a
+            class="email-address"
+            href="mailto:ilyeshabib2000@gmail.com"
+            aria-label="إرسال بريد إلكتروني إلى Gh Ilyes"
+          >
+            <span aria-hidden="true">✉</span>
+            ilyeshabib2000@gmail.com
+          </a>
+
+          <div class="contact-actions">
+
+            <a
+              class="btn btn-primary"
+              href="mailto:ilyeshabib2000@gmail.com?subject=Talib%20DZ%20-%20Contact"
+            >
+              إرسال رسالة
+              <span aria-hidden="true">↗</span>
+            </a>
+
+            <button
+              class="btn btn-secondary"
+              id="copyEmail"
+              type="button"
+            >
+              نسخ البريد الإلكتروني
+              <span aria-hidden="true">▣</span>
+            </button>
+
+          </div>
+
+          <p class="contact-note" id="copyStatus" aria-live="polite">
+            Talib DZ — مشروع مستقل من تطوير Gh Ilyes
+          </p>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+
+      <div class="footer-main">
+
+        <div>
+          <a class="brand" href="#home">
+            <span class="brand-mark">ط</span>
+            <span>
+              <span class="brand-name">Talib DZ</span>
+              <span class="brand-subtitle" style="display:block;">منصة الطالب الجزائري</span>
+            </span>
+          </a>
+
+          <p class="footer-description">
+            مشروع رقمي مستقل يسعى إلى دعم الطالب الجزائري
+            عبر الموارد التعليمية وأدوات التنظيم والخدمات الرقمية.
+          </p>
+        </div>
+
+        <nav class="footer-links" aria-label="روابط أسفل الصفحة">
+          <a href="#home">الرئيسية</a>
+          <a href="#features">المميزات</a>
+          <a href="#partnership">الشراكة</a>
+          <a href="#founder">صاحب المشروع</a>
+          <a href="#contact">التواصل</a>
+        </nav>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          © <span id="currentYear"></span> Talib DZ. جميع الحقوق محفوظة.
+        </p>
+
+        <p>
+          فكرة وتطوير <strong>Gh Ilyes</strong>
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Floating download dock -->
+  <div class="download-dock">
+
+    <div class="dock-text">
+      <strong>Talib DZ</strong>
+      <span>فضاؤك الجامعي في مكان واحد</span>
+    </div>
+
+    <a
+      class="dock-button"
+      href="https://github.com/ilyeshabib2000-max/ilyes-gh/releases/download/1.2/Talib.DZ.apk"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      تحميل التطبيق ↓
+    </a>
+
+  </div>
+
+  <script>
+    // تحديث السنة تلقائيًا
+    document.getElementById("currentYear").textContent =
+      new Date().getFullYear();
+
+    // نسخ البريد الإلكتروني
+    const copyButton = document.getElementById("copyEmail");
+    const copyStatus = document.getElementById("copyStatus");
+    const email = "ilyeshabib2000@gmail.com";
+
+    copyButton.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(email);
+        copyStatus.textContent = "تم نسخ البريد الإلكتروني بنجاح.";
+        copyButton.innerHTML = "تم النسخ ✓";
+      } catch (error) {
+        copyStatus.textContent = "يمكنك نسخ البريد يدويًا: " + email;
+      }
+    });
+  </script>
 
 </body>
 </html>
