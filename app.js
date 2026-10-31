@@ -87,19 +87,26 @@
 
   /* السكرول */
   var ids = ['home', 'features', 'partnership', 'founder', 'contact'];
+  var prog = $('#progress'), navbar = $('#navbar'), dock = $('#dock'), tops = [], ticking = false, lastCur = '';
+  function measure() {
+    tops = ids.map(function (id) { var e = document.getElementById(id); return e ? e.getBoundingClientRect().top + window.pageYOffset : 1e9; });
+  }
   function onScroll() {
     var h = document.documentElement, sc = h.scrollTop, max = h.scrollHeight - h.clientHeight;
-    $('#progress').style.width = (max > 0 ? sc / max * 100 : 0) + '%';
-    $('#navbar').classList.toggle('scrolled', sc > 30);
-    $('#dock').classList.toggle('show', sc > 500 && (max - sc) > 400);
-    var cur = 'home';
-    ids.forEach(function (id) {
-      var e = document.getElementById(id);
-      if (e && e.getBoundingClientRect().top < window.innerHeight * 0.4) cur = id;
-    });
-    setActive(cur);
+    prog.style.transform = 'scaleX(' + (max > 0 ? sc / max : 0) + ')';
+    navbar.classList.toggle('scrolled', sc > 30);
+    dock.classList.toggle('show', sc > 500 && (max - sc) > 400);
+    var cur = 'home', line = sc + window.innerHeight * 0.4;
+    ids.forEach(function (id, i) { if (tops[i] < line) cur = id; });
+    if (cur !== lastCur) { lastCur = cur; setActive(cur); }
+    ticking = false;
   }
-  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+  }, { passive: true });
+  window.addEventListener('resize', measure);
+  window.addEventListener('load', function () { measure(); onScroll(); });
+  measure();
   onScroll();
 
   /* العدادات (textContent فقط) */
@@ -176,8 +183,8 @@
   var tgt = 14.62, bar = $('#avgBar'), num = $('#avgNum');
   function runAvg() {
     var t0 = null;
-    bar.style.width = '0';
-    setTimeout(function () { bar.style.width = (tgt / 20 * 100) + '%'; }, 100);
+    bar.style.transform = 'scaleX(0)';
+    setTimeout(function () { bar.style.transform = 'scaleX(' + (tgt / 20) + ')'; }, 100);
     function f(t) {
       if (!t0) t0 = t;
       var p = Math.min((t - t0) / 1600, 1);
@@ -187,7 +194,7 @@
     requestAnimationFrame(f);
   }
   if (bar && num) {
-    if (reduce) { bar.style.width = (tgt / 20 * 100) + '%'; }
+    if (reduce) { bar.style.transform = 'scaleX(' + (tgt / 20) + ')'; }
     else {
       runAvg();
       setInterval(function () { tgt = [14.62, 12.85, 15.4, 13.7][Math.floor(Math.random() * 4)]; runAvg(); }, 6000);
