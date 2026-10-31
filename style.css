@@ -18,7 +18,7 @@
   --shadow:0 24px 60px rgba(2,6,24,.55);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:100px}
+html{scroll-behavior:smooth;scroll-padding-top:100px;-webkit-text-size-adjust:100%;text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
 html.framed body{display:none!important}
 body{background:var(--ink);color:var(--mist);font-family:"Cairo",system-ui,"Segoe UI",Tahoma,sans-serif;line-height:1.9;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
@@ -73,7 +73,7 @@ a{color:inherit;text-decoration:none}
 .btn-ghost:hover{border-color:var(--sky);color:#fff;transform:translateY(-3px);background:rgba(141,180,255,.14)}
 
 /* الواجهة */
-.hero{padding:64px 0 90px}
+.hero{padding:64px 0 90px;overflow:hidden}
 .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
 .tag{display:inline-flex;align-items:center;gap:10px;padding:8px 18px;border-radius:999px;background:rgba(61,107,255,.14);border:1px solid rgba(141,180,255,.3);color:var(--sky);font-size:13px;font-weight:700;margin-bottom:24px}
 .tag::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--amber);animation:ping 1.8s infinite}
@@ -81,7 +81,7 @@ a{color:inherit;text-decoration:none}
 .hero h1{font-size:clamp(42px,6vw,78px);margin-bottom:22px}
 .w{display:inline-block;opacity:0;transform:translateY(40px) rotate(3deg);animation:wordin .8s cubic-bezier(.2,.9,.3,1.2) forwards}
 @keyframes wordin{to{opacity:1;transform:none}}
-.grad-t{background:var(--grad);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:flow 7s linear infinite}
+.grad-t{display:inline;background:var(--grad);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:flow 7s linear infinite}
 @keyframes flow{to{background-position:-200% 0}}
 .hero p.lead{color:var(--muted);font-size:18px;max-width:520px;margin-bottom:34px}
 .hero-btns{display:flex;gap:14px;flex-wrap:wrap}
@@ -226,3 +226,42 @@ footer{border-top:1px solid var(--line);padding:36px 0 110px;background:rgba(7,1
 }
 @media (max-width:560px){.partner,.dev{padding:28px 20px}.chip.c1{left:0}.chip.c2{right:0}.trust{flex-direction:column}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal,.w{opacity:1;transform:none}}
+
+/* ===== تحسينات خاصة بالهاتف ===== */
+@media (max-width:900px){
+  .glow i{filter:blur(60px);animation:none}
+  .stage::before{animation:none}
+  .navbar,.dock,.chip{-webkit-backdrop-filter:none;backdrop-filter:none}
+  .navbar{background:rgba(12,20,51,.96)}
+}
+@media (max-width:560px){
+  .container{width:calc(100% - 28px)}
+  .nav-wrap{top:8px;padding-inline:10px}
+  .navbar{padding:7px 8px 7px 12px;border-radius:18px}
+  .brand img{width:36px;height:36px}.brand b{font-size:19px}
+  .hero{padding:34px 0 56px}
+  .hero h1{font-size:clamp(33px,10.5vw,44px);line-height:1.35}
+  .hero p.lead{font-size:16px;margin-bottom:26px}
+  .tag{font-size:12px;margin-bottom:18px}
+  .hero-btns{flex-direction:column;align-items:stretch}
+  .hero-btns .btn,.row .btn{justify-content:center;width:100%}
+  .trust{margin-top:28px}
+  .stage{min-height:410px;margin-top:6px}
+  .stage::before{width:260px;height:260px}
+  .phone{width:min(236px,66vw)}
+  .chip{font-size:11.5px;padding:7px 12px}
+  .chip.c1{top:24px;left:0}.chip.c2{bottom:58px;right:0}.chip.c3{display:none}
+  section{padding:56px 0}section.tight{padding-top:6px}
+  .sec-head{margin-bottom:34px}.sec-head h2{font-size:30px}
+  .bx{padding:24px 20px;border-radius:22px}.bx h3{font-size:21px}
+  .bento{gap:14px}
+  .partner,.dev{padding:26px 18px;border-radius:26px}
+  .avatar{width:104px;height:104px}.dev-name{font-size:34px}
+  .contact{padding:50px 18px;border-radius:28px}
+  .mail{font-size:17px}
+  .track span{font-size:19px}
+  .foot{justify-content:center;text-align:center}.foot .b{flex-direction:column}
+  footer{padding-bottom:100px}
+  .dock{bottom:calc(10px + env(safe-area-inset-bottom,0px));width:calc(100% - 24px);justify-content:space-between;gap:10px;padding:8px 8px 8px 14px}
+  .dock a{white-space:nowrap}
+}

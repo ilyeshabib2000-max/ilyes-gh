@@ -40,8 +40,6 @@
       });
     }
     wrap(h);
-    var g = h.querySelector('.grad-t');
-    if (g) g.style.display = 'inline-block';
   })();
 
   /* الشريط المتحرك */
